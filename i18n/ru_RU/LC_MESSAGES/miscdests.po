@@ -106,7 +106,7 @@ msgstr "Дополнительное направление: %s"
 
 #: miscdests.i18n.php:4 miscdests.i18n.php:10 page.miscdests.php:8
 msgid "Misc Destinations"
-msgstr "Дополнительные назначения"
+msgstr "Дополнительные направления"
 
 #: page.miscdests.php:9
 msgid ""
