@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FreePBX 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-18 10:50+0530\n"
+"POT-Creation-Date: 2024-07-08 04:14+0000\n"
 "PO-Revision-Date: 2006-10-17 17:30+0300\n"
 "Last-Translator: Shimi <shimi@shimi.net>\n"
 "MIME-Version: 1.0\n"
@@ -22,17 +22,6 @@ msgstr ""
 #: page.miscdests.php:19 views/bootnav.php:3 views/grid.php:8
 msgid "Add Misc Destination"
 msgstr "הוסף יעד כללי"
-
-#: miscdests.i18n.php:8
-msgid ""
-"Allows creating destinations that dial any local number (extensions, feature "
-"codes, outside phone numbers) that can be used by other modules (eg, IVR, "
-"time conditions) as a call destination."
-msgstr ""
-
-#: miscdests.i18n.php:6
-msgid "Applications"
-msgstr ""
 
 #: Miscdests.class.php:74
 msgid "Delete"
@@ -94,7 +83,7 @@ msgstr ""
 msgid "Misc Destination: %s"
 msgstr "יעד כללי:"
 
-#: miscdests.i18n.php:4 miscdests.i18n.php:10 page.miscdests.php:8
+#: page.miscdests.php:8
 #, fuzzy
 msgid "Misc Destinations"
 msgstr "יעד כללי"

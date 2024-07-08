@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-18 10:50+0530\n"
+"POT-Creation-Date: 2024-07-08 04:14+0000\n"
 "PO-Revision-Date: 2018-05-29 13:59+0000\n"
 "Last-Translator: Stell0 <stefano.fancello@nethesis.it>\n"
 "Language-Team: Italian <http://*/projects/freepbx/miscdests/it/>\n"
@@ -22,21 +22,6 @@ msgstr "Azioni"
 #: page.miscdests.php:19 views/bootnav.php:3 views/grid.php:8
 msgid "Add Misc Destination"
 msgstr "Aggiungi Destinazione"
-
-#: miscdests.i18n.php:8
-msgid ""
-"Allows creating destinations that dial any local number (extensions, feature "
-"codes, outside phone numbers) that can be used by other modules (eg, IVR, "
-"time conditions) as a call destination."
-msgstr ""
-"Consente di creare destinazioni che compongono numeri locali (estensioni, "
-"codici funzione, numeri di telefono esterni) che possono essere utilizzati "
-"da altri moduli (ad es. IVR, condizioni temporali) come destinazione della "
-"chiamata."
-
-#: miscdests.i18n.php:6
-msgid "Applications"
-msgstr "Applicazioni"
 
 #: Miscdests.class.php:74
 msgid "Delete"
@@ -106,7 +91,7 @@ msgstr ""
 msgid "Misc Destination: %s"
 msgstr "Destinazione: %s"
 
-#: miscdests.i18n.php:4 miscdests.i18n.php:10 page.miscdests.php:8
+#: page.miscdests.php:8
 msgid "Misc Destinations"
 msgstr "Destinazioni Varie"
 
@@ -145,6 +130,19 @@ msgid ""
 msgstr ""
 "Questa destinazione è in uso. L'eliminazione potrebbe far sì che le cose non "
 "funzionino correttamente"
+
+#~ msgid ""
+#~ "Allows creating destinations that dial any local number (extensions, "
+#~ "feature codes, outside phone numbers) that can be used by other modules "
+#~ "(eg, IVR, time conditions) as a call destination."
+#~ msgstr ""
+#~ "Consente di creare destinazioni che compongono numeri locali (estensioni, "
+#~ "codici funzione, numeri di telefono esterni) che possono essere "
+#~ "utilizzati da altri moduli (ad es. IVR, condizioni temporali) come "
+#~ "destinazione della chiamata."
+
+#~ msgid "Applications"
+#~ msgstr "Applicazioni"
 
 #~ msgid "Removing Settings table"
 #~ msgstr "Rimozione della tabella delle impostazioni"

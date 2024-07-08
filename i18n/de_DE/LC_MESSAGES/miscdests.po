@@ -6,17 +6,6 @@ msgstr ""
 msgid "Add Misc Destination"
 msgstr ""
 
-#: miscdests.i18n.php:8
-msgid ""
-"Allows creating destinations that dial any local number (extensions, feature "
-"codes, outside phone numbers) that can be used by other modules (eg, IVR, "
-"time conditions) as a call destination."
-msgstr ""
-
-#: miscdests.i18n.php:6
-msgid "Applications"
-msgstr ""
-
 #: Miscdests.class.php:74
 msgid "Delete"
 msgstr ""
@@ -75,7 +64,7 @@ msgstr ""
 msgid "Misc Destination: %s"
 msgstr ""
 
-#: miscdests.i18n.php:4 miscdests.i18n.php:10 page.miscdests.php:8
+#: page.miscdests.php:8
 msgid "Misc Destinations"
 msgstr ""
 

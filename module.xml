@@ -2,7 +2,7 @@
 	<rawname>miscdests</rawname>
 	<repo>extended</repo>
 	<name>Misc Destinations</name>
-	<version>16.0.1</version>
+	<version>16.0.2</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>https://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -10,7 +10,7 @@
 	<description>Allows creating destinations that dial any local number (extensions, feature codes, outside phone numbers) that can be used by other modules (eg, IVR, time conditions) as a call destination.</description>
   	<more-info>https://wiki.freepbx.org/display/FPG/Misc+Destinations</more-info>
 	<changelog>
-		*16.0.1* 16.0
+		*16.0.2* 16.0
 	</changelog>
 	<depends>
 		<version>16.0</version>

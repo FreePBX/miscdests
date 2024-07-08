@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-18 10:50+0530\n"
+"POT-Creation-Date: 2024-07-08 04:14+0000\n"
 "PO-Revision-Date: 2016-06-07 14:43+0200\n"
 "Last-Translator: Media <mousavi.media@gmail.com>\n"
 "Language-Team: Persian (Iran) <http://weblate.freepbx.org/projects/freepbx/"
@@ -28,20 +28,6 @@ msgstr "عملیات"
 #: page.miscdests.php:19 views/bootnav.php:3 views/grid.php:8
 msgid "Add Misc Destination"
 msgstr "افزودن مقصد اضافی"
-
-#: miscdests.i18n.php:8
-msgid ""
-"Allows creating destinations that dial any local number (extensions, feature "
-"codes, outside phone numbers) that can be used by other modules (eg, IVR, "
-"time conditions) as a call destination."
-msgstr ""
-"Allows creating destinations that  dial any local number (extensions, "
-"feature codes, outside phone numbers) that can be used by other modules (eg, "
-"IVR, time conditions) as a call destination."
-
-#: miscdests.i18n.php:6
-msgid "Applications"
-msgstr "برنامه ها"
 
 #: Miscdests.class.php:74
 msgid "Delete"
@@ -110,7 +96,7 @@ msgstr ""
 msgid "Misc Destination: %s"
 msgstr "مقصد اضافی：%s"
 
-#: miscdests.i18n.php:4 miscdests.i18n.php:10 page.miscdests.php:8
+#: page.miscdests.php:8
 msgid "Misc Destinations"
 msgstr "مقاصد اضافه"
 
@@ -146,6 +132,18 @@ msgstr "ثبت"
 msgid ""
 "This destination is in use. Deleting it may cause things to not work properly"
 msgstr "این مقصد درحال استفاده است. حذف آن باعث ایجاد مشکل میشود"
+
+#~ msgid ""
+#~ "Allows creating destinations that dial any local number (extensions, "
+#~ "feature codes, outside phone numbers) that can be used by other modules "
+#~ "(eg, IVR, time conditions) as a call destination."
+#~ msgstr ""
+#~ "Allows creating destinations that  dial any local number (extensions, "
+#~ "feature codes, outside phone numbers) that can be used by other modules "
+#~ "(eg, IVR, time conditions) as a call destination."
+
+#~ msgid "Applications"
+#~ msgstr "برنامه ها"
 
 #~ msgid "Removing Settings table"
 #~ msgstr "حذف تنظیمات جدول"

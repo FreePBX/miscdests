@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-20 03:56+0000\n"
+"POT-Creation-Date: 2024-07-08 04:14+0000\n"
 "PO-Revision-Date: 2023-11-18 14:01+0000\n"
 "Last-Translator: Szymon Wysokinski <szymon.wysokinski@sqspolska.pl>\n"
 "Language-Team: Polish <http://weblate.freepbx.org/projects/freepbx/miscdests/"
 "pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
@@ -26,24 +26,11 @@ msgstr ""
 msgid "Actions"
 msgstr "Działania"
 
-#: page.miscdests.php:19
-#: views/bootnav.php:3
-#: views/grid.php:8
+#: page.miscdests.php:19 views/bootnav.php:3 views/grid.php:8
 msgid "Add Misc Destination"
 msgstr ""
 
-#: miscdests.i18n.php:8
-msgid ""
-"Allows creating destinations that dial any local number (extensions, feature "
-"codes, outside phone numbers) that can be used by other modules (eg, IVR, "
-"time conditions) as a call destination."
-msgstr ""
-
-#: miscdests.i18n.php:6
-msgid "Applications"
-msgstr ""
-
-#: Miscdests.class.php:79
+#: Miscdests.class.php:74
 msgid "Delete"
 msgstr ""
 
@@ -96,14 +83,11 @@ msgstr ""
 msgid "Misc Destination already exists"
 msgstr ""
 
-#: Miscdests.class.php:132
-#: functions.inc.php:38
+#: Miscdests.class.php:127 functions.inc.php:38
 #, php-format
 msgid "Misc Destination: %s"
 msgstr ""
 
-#: miscdests.i18n.php:4
-#: miscdests.i18n.php:10
 #: page.miscdests.php:8
 msgid "Misc Destinations"
 msgstr ""
@@ -124,15 +108,11 @@ msgstr ""
 msgid "Please enter a valid Dial string"
 msgstr ""
 
-#: Miscdests.class.php:22
-msgid "Removing Settings table"
-msgstr ""
-
-#: Miscdests.class.php:84
+#: Miscdests.class.php:79
 msgid "Reset"
 msgstr ""
 
-#: Miscdests.class.php:89
+#: Miscdests.class.php:84
 msgid "Submit"
 msgstr ""
 
