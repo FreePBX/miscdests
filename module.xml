@@ -8,7 +8,7 @@
 	<licenselink>https://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
 	<category>Applications</category>
 	<description>Allows creating destinations that dial any local number (extensions, feature codes, outside phone numbers) that can be used by other modules (eg, IVR, time conditions) as a call destination.</description>
-  	<more-info>https://wiki.freepbx.org/display/FPG/Misc+Destinations</more-info>
+  	<more-info>https://sangomakb.atlassian.net/wiki/spaces/PG/pages/24379484/PBX+GUI+-+Misc+Destinations</more-info>
 	<changelog>
 		*17.0.1.1* 17.0.1.1
 		*17.0.1* 17.0
