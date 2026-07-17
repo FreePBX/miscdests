@@ -2,7 +2,7 @@
 	<rawname>miscdests</rawname>
 	<repo>extended</repo>
 	<name>Misc Destinations</name>
-	<version>17.0.1.1</version>
+	<version>18.0.1</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>https://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -10,11 +10,10 @@
 	<description>Allows creating destinations that dial any local number (extensions, feature codes, outside phone numbers) that can be used by other modules (eg, IVR, time conditions) as a call destination.</description>
   	<more-info>https://sangomakb.atlassian.net/wiki/spaces/PG/pages/24379484/PBX+GUI+-+Misc+Destinations</more-info>
 	<changelog>
-		*17.0.1.1* 17.0.1.1
-		*17.0.1* 17.0
+		*18.0.1* initial release
 	</changelog>
 	<depends>
-		<version>17.0</version>
+		<version>18.0</version>
 	</depends>
 	<menuitems>
 		<miscdests>Misc Destinations</miscdests>
@@ -33,6 +32,6 @@
 		</miscdests>
 	</popovers>
 	<supported>
-		<version>17.0</version>
+		<version>18.0</version>
 	</supported>
 </module>
