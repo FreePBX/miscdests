@@ -11,9 +11,15 @@ use BMO;
 use FreePBX_Helpers;
 use PDO;
 class Miscdests extends FreePBX_Helpers implements BMO {
+	/** @var \FreePBX */
+	public $FreePBX;
+
+	/** @var \FreePBX\Database|PDO */
+	public $Database;
+
 	public function __construct($freepbx = null) {
 		if ($freepbx == null) {
-			throw new Exception("Not given a FreePBX Object");
+			throw new \Exception("Not given a FreePBX Object");
 		}
 		$this->FreePBX = $freepbx;
 		$this->Database = $freepbx->Database;
@@ -30,17 +36,17 @@ class Miscdests extends FreePBX_Helpers implements BMO {
 		isset($request['action'])?$action = $request['action']:$action='';
 		switch ($action) {
 			case "add":
-				$extdisplay = $this->add($request['description'],$request['destdial']);
+				$extdisplay = $this->add($request['description'] ?? '', $request['destdial'] ?? '');
 				needreload();
 				redirect_standard();
 				break;
 			case "delete":
-				$this->del($request['extdisplay']);
+				$this->del($request['extdisplay'] ?? '');
 				needreload();
 				redirect_standard();
 				break;
 			case "edit":
-				$this->update($request['extdisplay'],$request['description'],$request['destdial']);
+				$this->update($request['extdisplay'] ?? '', $request['description'] ?? '', $request['destdial'] ?? '');
 				needreload();
 				redirect_standard('extdisplay', 'view');
 			break;
@@ -51,21 +57,24 @@ class Miscdests extends FreePBX_Helpers implements BMO {
 		$fctemplate = '/\{(.+)\:(.+)\}/';
 		if(is_array($destlist = $this->mdlist())) {
 			foreach($destlist as $item) {
-				$miscdest = $this->get($item['0']);
+				$miscdest = $this->get($item['0'])[0] ?? null;
+				if ($miscdest === null) {
+					continue;
+				}
 				$miscid = $miscdest['id'];
 				$miscdescription = $miscdest['description'];
 				$miscdialdest = $miscdest['destdial'];
 				// exchange {mod:fc} for the relevent feature codes in $miscdialdest
-				$miscdialdest = preg_replace_callback($fctemplate, "miscdests_lookupfc", $miscdialdest);
+				$miscdialdest = preg_replace_callback($fctemplate, array($this, 'lookupfc'), $miscdialdest);
 				// write out the dialplan details
-				$ext->add($contextname, $miscid, '', new ext_noop('MiscDest: '.$miscdescription));
-				$ext->add($contextname, $miscid, '', new ext_goto('from-internal,'.$miscdialdest.',1', ''));
+				$ext->add($contextname, $miscid, '', new \ext_noop('MiscDest: '.$miscdescription));
+				$ext->add($contextname, $miscid, '', new \ext_goto('from-internal,'.$miscdialdest.',1', ''));
 			}
 		}
 	}
 	public function getActionBar($request) {
 		$buttons = array();
-		switch($request['display']) {
+		switch($request['display'] ?? '') {
 			case 'miscdests':
 				$buttons = array(
 					'delete' => array(
@@ -97,13 +106,14 @@ class Miscdests extends FreePBX_Helpers implements BMO {
 	// returns a associative arrays with keys 'destination' and 'description'
 	public function destinations() {
 		$results = $this->mdlist();
+		$extens = array();
 
 		// return an associative array with destination and description
 		if (isset($results)) {
 			foreach($results as $result){
 					$extens[] = array('destination' => 'ext-miscdests,'.$result['0'].',1', 'description' => $result['1']);
 			}
-			return $extens;
+			return !empty($extens) ? $extens : null;
 		} else {
 			return null;
 		}
@@ -119,13 +129,13 @@ class Miscdests extends FreePBX_Helpers implements BMO {
 		if (substr(trim($dest),0,14) == 'ext-miscdests,') {
 			$exten = explode(',',$dest);
 			$exten = $exten[1];
-			$thisexten = $this->get($exten);
+			$thisexten = $this->get($exten)[0] ?? null;
 			if (empty($thisexten)) {
 				return array();
 			} else {
 				//$type = isset($active_modules['announcement']['type'])?$active_modules['announcement']['type']:'setup';
 				return array('description' => sprintf(_("Misc Destination: %s"),$thisexten['description']),
-							 'edit_url' => 'config.php?display=miscdests&id='.urlencode($exten),
+							 'edit_url' => 'config.php?display=miscdests&view=form&extdisplay='.urlencode($exten),
 									  );
 			}
 		} else {
@@ -140,20 +150,21 @@ class Miscdests extends FreePBX_Helpers implements BMO {
             $sql = 'SELECT * FROM miscdests ORDER BY description';
         }
 		$q = $db->prepare($sql);
-		$ob = $q->execute();
+		$q->execute();
+		$extens = array();
 
 		if($q){
             if($all){
                 return $q->fetchAll(PDO::FETCH_ASSOC);
             }
 
-            $results = $q->fetchAll();
+            $results = $q->fetchAll(PDO::FETCH_ASSOC);
 
 			foreach($results as $result){
 				$extens[] = array($result['id'],$result['description']);
 			}
 		}
-		if (isset($extens)) {
+		if (!empty($extens)) {
 			return $extens;
 		} else {
 			return null;
@@ -167,13 +178,13 @@ class Miscdests extends FreePBX_Helpers implements BMO {
 		}
 		$q = $db->prepare($sql);
 		if ($id) {
-			$ob = $q->execute(array(":id" => $id));
+			$q->execute(array(":id" => $id));
 		}else {
-			$ob = $q->execute();
+			$q->execute();
 		}
 		$allmd = array();
 		if($q){
-			$results = $q->fetchAll();
+			$results = $q->fetchAll(PDO::FETCH_ASSOC);
 			foreach($results as $result){
 				$allmd[] = $result['description'];
 			}
@@ -185,9 +196,9 @@ class Miscdests extends FreePBX_Helpers implements BMO {
 		$db = $this->Database;
 		$sql = "SELECT id, description, destdial FROM miscdests WHERE id = ?";
 		$q = $db->prepare($sql);
-		$ob = $q->execute(array($id));
+		$q->execute(array($id));
 		if($q){
-			$results = $q->fetchAll();
+			$results = $q->fetchAll(PDO::FETCH_ASSOC);
 			return $results;
 		}
 		return false;
@@ -197,7 +208,7 @@ class Miscdests extends FreePBX_Helpers implements BMO {
 		$db = $this->Database;
 		$sql = "DELETE FROM miscdests WHERE id = ?";
 		$q = $db->prepare($sql);
-		$ob = $q->execute(array($id));
+		$q->execute(array($id));
 		if($q){
 			return $q->rowCount();
 		}
@@ -208,8 +219,8 @@ class Miscdests extends FreePBX_Helpers implements BMO {
 		$db = $this->Database;
 		$sql = "INSERT INTO miscdests (description, destdial) VALUES (?,?)";
 		$q = $db->prepare($sql);
-		$ob = $q->execute(array($description,trim($destdial)));
-		return $db->lastInsertId('id');
+		$q->execute(array($description,trim($destdial)));
+		return $db->lastInsertId();
 	}
 
     public function upsert($id, $description, $destdial){
@@ -235,7 +246,7 @@ class Miscdests extends FreePBX_Helpers implements BMO {
 		$modulename = $matches[1];
 		$featurename = $matches[2];
 
-		$fcc = new featurecode($modulename, $featurename);
+		$fcc = new \featurecode($modulename, $featurename);
 		$fc = $fcc->getCodeActive();
 		return $fc;
 	}
@@ -250,9 +261,9 @@ class Miscdests extends FreePBX_Helpers implements BMO {
 			}
 	}
 	public function ajaxHandler(){
-		switch ($_REQUEST['command']) {
+		switch ($_REQUEST['command'] ?? '') {
 			case 'getJSON':
-				switch ($_REQUEST['jdata']) {
+				switch ($_REQUEST['jdata'] ?? '') {
 					case 'grid':
 						$mdl = $this->mdlist();
 						$mdl = is_array($mdl)?$mdl:array();

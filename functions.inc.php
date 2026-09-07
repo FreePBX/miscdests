@@ -7,13 +7,14 @@ if (!defined('FREEPBX_IS_AUTH')) { die('No direct script access allowed'); }
 // returns a associative arrays with keys 'destination' and 'description'
 function miscdests_destinations() {
 	$results = miscdests_list();
+	$extens = array();
 
 	// return an associative array with destination and description
 	if (isset($results)) {
 		foreach($results as $result){
 			$extens[] = array('destination' => 'ext-miscdests,'.$result['0'].',1', 'description' => $result['1']);
 		}
-		return $extens;
+		return !empty($extens) ? $extens : null;
 	} else {
 		return null;
 	}
@@ -59,6 +60,9 @@ function miscdests_get_config($engine) {
 				
 				foreach($destlist as $item) {
 					$miscdest = miscdests_get($item['0']);
+					if (empty($miscdest)) {
+						continue;
+					}
 					
 					$miscid = $miscdest['id'];
 					$miscdescription = $miscdest['description'];
@@ -80,11 +84,15 @@ function miscdests_get_config($engine) {
 
 function miscdests_list() {
 	$results = sql("SELECT id, description FROM miscdests ORDER BY description","getAll",DB_FETCHMODE_ASSOC);
+	if (!is_array($results)) {
+		return null;
+	}
+	$extens = array();
 	foreach($results as $result){
 		$extens[] = array($result['id'],$result['description']);
 	}
 
-	if (isset($extens)) {
+	if (!empty($extens)) {
 		return $extens;
 	} else {
 		return null;
@@ -92,28 +100,33 @@ function miscdests_list() {
 }
 
 function miscdests_get($id){
-	$results = sql("SELECT id, description, destdial FROM miscdests WHERE id = $id","getRow",DB_FETCHMODE_ASSOC);
-	return $results;
+	global $db;
+
+	$stmt = $db->prepare("SELECT id, description, destdial FROM miscdests WHERE id = ?");
+	$stmt->execute(array($id));
+	return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
 function miscdests_del($id){
-	$results = sql("DELETE FROM miscdests WHERE id = $id","query");
+	global $db;
+
+	$stmt = $db->prepare("DELETE FROM miscdests WHERE id = ?");
+	return $stmt->execute(array($id));
 }
 
 function miscdests_add($description, $destdial){
 	global $db;
-	global $amp_conf;
-	$results = sql("INSERT INTO miscdests (description, destdial) VALUES (".sql_formattext($description).",".sql_formattext($destdial).")");
-	if (method_exists($db,'insert_id')) {
-		$id = $db->insert_id();
-	} else {
-		$id = $amp_conf["AMPDBENGINE"] == "sqlite3" ? sqlite_last_insert_rowid($db->connection) : mysql_insert_id($db->connection);
-	}
-	return($id);
+
+	$stmt = $db->prepare("INSERT INTO miscdests (description, destdial) VALUES (?, ?)");
+	$stmt->execute(array($description, $destdial));
+	return $db->lastInsertId();
 }
 
 function miscdests_update($id, $description, $destdial){
-	$results = sql("UPDATE miscdests SET description = ".sql_formattext($description).", destdial = ".sql_formattext($destdial)." WHERE id = ".$id);
+	global $db;
+
+	$stmt = $db->prepare("UPDATE miscdests SET description = ?, destdial = ? WHERE id = ?");
+	return $stmt->execute(array($description, $destdial, $id));
 }
 
 function miscdests_lookupfc($matches) {
