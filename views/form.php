@@ -2,11 +2,12 @@
 //	License for all code of this FreePBX module can be found in the license file inside the module directory
 //	Copyright 2015 Sangoma Technologies.
 extract($request, EXTR_SKIP);
+$extdisplay = $extdisplay ?? '';
 if($extdisplay){
 	$thisMiscDest = $md->get($extdisplay);
-	$thisMiscDest = $thisMiscDest[0];
-	$description = $thisMiscDest['description'] ? $thisMiscDest['description']:'';
-	$destdial = $thisMiscDest['destdial'] ? $thisMiscDest['destdial']:'';
+	$thisMiscDest = $thisMiscDest[0] ?? array();
+	$description = $thisMiscDest['description'] ?? '';
+	$destdial = $thisMiscDest['destdial'] ?? '';
 }
 ?>
 <form autocomplete="off" class="fpbx-submit" name="editMD" action="config.php?display=miscdests" onsubmit="return editMD_onsubmit()" method="post" data-fpbx-delete="config.php?display=miscdests&amp;extdisplay=<?php echo $extdisplay ?>&amp;action=delete" role="form">

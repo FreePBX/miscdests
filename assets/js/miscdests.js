@@ -1,9 +1,11 @@
 var theForm = document.editMD;
 
-if (theForm.description.value == "") {
-	theForm.description.focus();
-} else {
-	theForm.destdial.focus();
+if (typeof theForm !== 'undefined') {
+	if (theForm.description.value == "") {
+		theForm.description.focus();
+	} else {
+		theForm.destdial.focus();
+	}
 }
 
 function editMD_onsubmit()
@@ -40,7 +42,7 @@ function editMD_onsubmit()
 		// if there is nothing in chkText but something in fldText
 		// then the field must contain a featurecode only, therefore
 		// there really is something in thre!
-		if ( (chkText == "") & (fldText != "") )
+		if ( (chkText == "") && (fldText != "") )
 			chkText = "0";
 
 	} else {
